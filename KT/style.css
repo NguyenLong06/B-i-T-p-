@@ -1,0 +1,8 @@
+
+
+body { background-color: #f8f9fa; }
+.card-img-top { height: 180px; }
+.object-fit-cover { object-fit: cover; }
+.container-narrow { max-width: 760px; }
+.form-help { font-size: 0.9rem; color: #6c757d; }
+

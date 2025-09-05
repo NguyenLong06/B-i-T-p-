@@ -1,0 +1,65 @@
+<!-- tổng hợp từ nhiều nguồn trên YT =) -->
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tin tức - Chi tiết</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="index.html">NewsSite</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="submit.html">Gửi tin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container container-narrow py-4">
+        <article id="article" class="bg-white p-3 p-md-4 rounded shadow-sm"></article>
+    </main>
+
+    <footer class="py-4 mt-5 border-top text-center text-secondary">
+        <small>© 2025 NewsSite</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/storage.js"></script>
+    <script>
+        (function renderDetail() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const container = document.getElementById('article');
+            const item = id ? NewsStorage.getById(id) : null;
+            if (!item) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <p class="text-secondary mb-3">Không tìm thấy bài viết.</p>
+                        <a href="index.html" class="btn btn-outline-primary">Quay lại trang chủ</a>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = `
+                <h1 class="fw-bold mb-3">${item.title}</h1>
+                <img src="${item.image}" alt="${item.title}" class="img-fluid rounded mb-3" />
+                <div class="text-secondary mb-4">${new Date(item.createdAt).toLocaleString('vi-VN')}</div>
+                <div style="white-space: pre-wrap; line-height:1.7">${item.content}</div>
+            `;
+        })();
+    </script>
+</body>
+</html>
+
+
